@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+// here code to fetch/axios infos
+// build vue with another file.vue
 </script>
 
 <template>
