@@ -1,87 +1,44 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-// here code to fetch/axios infos
-// build vue with another file.vue
+import FooterView from './components/Footer.vue'
+import CardView from './components/Card.vue'
+
 </script>
 
+
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+		<div id="app">
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+			<!-- Header -->
+				<div id="header-wrapper">
+					<div id="stars-00"></div>
+<div id="stars-01"></div>
+<div id="stars-02"></div>
+					<!-- Logo -->
+					<div id="logo">
+            			<img class="logoPoke centrer" src="../public/img/logoPokesmashBlanc.png">
+					</div>
+					<div class="centrer">
+						<CardView />
+					</div>
+          		
+          		<!-- <FooterView /> -->
+				</div>
     </div>
-  </header>
-
-  <RouterView />
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
+  #app {
     display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+	font-family: 'Reem Kufi Fun', sans-serif;
+	text-align: center;
+    padding: 20px;
+	background: rgb(143,0,0);
+	background: linear-gradient(90deg, rgba(143,0,0,1) 0%, rgba(212,3,3,1) 25%, rgba(255,75,75,1) 50%, rgba(60,152,255,1) 50%, rgba(0,96,204,1) 76%, rgba(0,22,119,1) 100%);
   }
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
 </style>
