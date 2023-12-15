@@ -93,14 +93,15 @@
           return;
         }
 
-        console.log('Commentaire à envoyer à l\'API :', this.comment);
+        const testBody = { pokemon_comment_content: this.comment, pokemon_id: this.pokemon?.id, pokemon_comment_author: 'author' }
+        console.log('Commentaire à envoyer à l\'API :', testBody);
 
-        fetch(`http://localhost:9999/api/pokemon/${this.pokemon.id}`, {
+        fetch(`http://localhost:9998/comment`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ comment: this.comment })
+          body: JSON.stringify(testBody)
         })
           .then(response => {
             if (!response.ok) {
@@ -115,6 +116,7 @@
       },
       editComment() {
         window.alert("L'API n'est pas encore développée");
+        // fetch(`http://localhost:9998/comment`)
       }
     }
   };
