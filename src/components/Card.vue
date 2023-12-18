@@ -93,15 +93,15 @@
           return;
         }
 
-        const testBody = { pokemon_comment_content: this.comment, pokemon_id: this.pokemon?.id, pokemon_comment_author: 'author' }
-        console.log('Commentaire à envoyer à l\'API :', testBody);
+        const reqBody = { pokemon_comment_content: this.comment, pokemon_id: this.pokemon?.id, pokemon_comment_author: 'author' }
+        console.log('Commentaire à envoyer à l\'API :', reqBody);
 
         fetch(`http://localhost:9998/comment`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(testBody)
+          body: JSON.stringify(reqBody)
         })
           .then(response => {
             if (!response.ok) {
