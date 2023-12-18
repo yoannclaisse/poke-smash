@@ -30,6 +30,7 @@
           <p class="pokemon-info">{{ pokemon.name }}</p>
           <p clas="pokedex">{{ pokemon.id }}/1010</p>
           <div id="comment-section">
+          <textarea v-model="author" placeholder="Renseignez votre nom" class="author-input"></textarea>
           <textarea v-model="comment" placeholder="Exprimez-vous sur ce Pokémon" class="comment-input"></textarea>
           <div class="button-group">
             <button @click="sendComment" class="send-button">Envoyer</button>
@@ -60,6 +61,7 @@
       return {
         pokemon: null,
         comment: '',
+        author: '',
         isEditMode: false
       };
     },
@@ -110,7 +112,7 @@
         }
 
         // ici on envoie les commentaires d'un pokémon
-        const reqBody = { pokemon_comment_content: this.comment, pokemon_id: this.pokemon?.id, pokemon_comment_author: 'author' }
+        const reqBody = { pokemon_comment_content: this.comment, pokemon_id: this.pokemon?.id, pokemon_comment_author: this.author }
         console.log('Commentaire à envoyer à l\'API :', reqBody);
         fetch(`http://localhost:9999/api/pokemon/comment`, {
           method: 'POST',
@@ -153,7 +155,7 @@
 
   #pokemon-details {
 	width: 330px !important;
-    height: 450px !important;
+  height: auto;
 	background: radial-gradient(circle at 100% 100%, #ffffff00 0, #ffffff00 2px, transparent 2px) 0% 0%/17px 17px no-repeat,
             radial-gradient(circle at 0 100%, #ffffff00 0, #ffffff00 2px, transparent 2px) 100% 0%/17px 17px no-repeat,
             radial-gradient(circle at 100% 0, #ffffff00 0, #ffffff00 2px, transparent 2px) 0% 100%/17px 17px no-repeat,
@@ -233,6 +235,15 @@
 
   .comment-input {
     width: 100%;
+    padding: 10px;
+    border: 1px solid #ffe000;
+    background: #f7f7f72e;
+    font-family: 'Poppins', sans-serif;    border-radius: 5px;
+  }
+
+  .author-input {
+    width: 100%;
+    height: 55px;
     padding: 10px;
     border: 1px solid #ffe000;
     background: #f7f7f72e;
