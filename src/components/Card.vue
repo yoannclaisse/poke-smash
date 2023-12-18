@@ -36,7 +36,15 @@
             <button @click="sendComment" class="send-button">Envoyer</button>
             <button @click="editComment" class="edit-button">Modifier</button>
           </div>
-          </div>
+        </div>
+
+        <div class="comments-in-db">
+          <li v-for="comment in pokemon.comments">
+            {{ comment.pokemon_comment_content }}
+            {{ comment.pokemon_comment_author }}
+            <button @click="deleteComment(comment.pokemon_comment_id)" class="delete-button">supprimer</button>
+          </li>
+        </div>
 
 
         </div>
@@ -105,6 +113,25 @@
         window.location.reload();
       },
 
+      deleteComment(commentId) {
+        fetch(`http://localhost:9999/api/pokemon/comment/${commentId}`, {method: 'DELETE'})
+        .then(response => {
+            if (!response.ok) {
+              throw new Error(`Erreur HTTP! Statut: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then(data => {
+            // this.pokemon = data;
+            let index = this.pokemon.comments.findIndex(c => c.pokemon_comment_id === commentId); //find index in your array
+            this.pokemon.comments.splice(index, 1);//remove element from array
+  
+          })
+          .catch(error => {
+            console.error('Erreur lors de la requête à l\'API', error);
+          });
+      },
+
       sendComment() {
         if (this.comment.trim() === '') {
           console.warn('Le commentaire ne peut pas être vide.');
@@ -127,6 +154,9 @@
             }
             console.log('Commentaire envoyé avec succès.');
             this.comment = '';
+            const responseJson = response.json().then(comment => {
+              this.pokemon.comments.push(comment)
+            })  
           })
           .catch(error => {
             console.error('Erreur lors de l\'envoi du commentaire à l\'API', error);
