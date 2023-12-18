@@ -83,10 +83,25 @@
             console.error('Erreur lors de la requête à l\'API', error);
           });
       },
+
       reloadPage(action) {
         console.log(action);
+        fetch(`http://localhost:9999/api/pokemon/${this.pokemon.id}/${action}`, {method: 'PATCH'})
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`Erreur HTTP! Statut: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then(data => {
+            this.pokemon = data;
+          })
+          .catch(error => {
+            console.error('Erreur lors de la requête à l\'API', error);
+          });
         window.location.reload();
       },
+
       sendComment() {
         if (this.comment.trim() === '') {
           console.warn('Le commentaire ne peut pas être vide.');
@@ -96,7 +111,7 @@
         const reqBody = { pokemon_comment_content: this.comment, pokemon_id: this.pokemon?.id, pokemon_comment_author: 'author' }
         console.log('Commentaire à envoyer à l\'API :', reqBody);
 
-        fetch(`http://localhost:9998/comment`, {
+        fetch(`http://localhost:9999/api/pokemon/comment`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -116,7 +131,7 @@
       },
       editComment() {
         window.alert("L'API n'est pas encore développée");
-        // fetch(`http://localhost:9998/comment`)
+        // fetch(`http://localhost:9999/comment`)
       }
     }
   };
