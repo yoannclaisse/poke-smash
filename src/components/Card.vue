@@ -41,6 +41,7 @@
         </div>
           <div id="buttons-container">
             <div class="button-group">
+              <!-- Au click update de smash et pass en db -->
               <button @click="reloadPage('pass')" class="pass-button"> <img src="../assets/images/oak2.png" class="iconeVote"></button>
               <button @click="reloadPage('smash')" class="smash-button"><img src="../assets/images/smashpoke.png" class="iconeVote"></button>
             </div>
@@ -108,9 +109,9 @@
           return;
         }
 
+        // ici on envoie les commentaires d'un pokémon
         const reqBody = { pokemon_comment_content: this.comment, pokemon_id: this.pokemon?.id, pokemon_comment_author: 'author' }
         console.log('Commentaire à envoyer à l\'API :', reqBody);
-
         fetch(`http://localhost:9999/api/pokemon/comment`, {
           method: 'POST',
           headers: {
